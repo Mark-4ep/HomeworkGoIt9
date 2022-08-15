@@ -1,14 +1,14 @@
 
 
-public class MyHashMap<K,V> {
+public class MyHashMap<V,K> {
 
-    private Node<K,V> last;
-    private Node<K,V> first;
+    private Node<V,K> last;
+    private Node<V,K> first;
     private int size;
 
     public void put(V value, K key) {
-        final Node<K,V> l = last;
-        final Node<K,V> newNode = new Node<>(l, value, key, null);
+        final Node<V,K> l = last;
+        final Node<V,K> newNode = new Node<>(l, value, key, null);
         last = newNode;
         if (l == null)
             first = newNode;
@@ -18,12 +18,12 @@ public class MyHashMap<K,V> {
     }
 
     public void remove(Object key) {
-        final Node<K,V> e = get(key);
+        final Node<V,K> e = get(key);
 
         final V elementValue = e.value;
         final K elementKey = e.key;
-        final Node<K,V> next = e.next;
-        final Node<K,V> prev = e.prev;
+        final Node<V,K> next = e.next;
+        final Node<V,K> prev = e.prev;
 
         if (prev == null) {
             first = next;
@@ -45,9 +45,9 @@ public class MyHashMap<K,V> {
 
     }
 
-    public Node<K,V> get(Object key) {
+    public Node<V,K> get(Object key) {
 
-        Node<K,V> x = first;
+        Node<V,K> x = first;
         for (int i = 0; i < size; i++)
             if (key.equals(x.key)) {
                 return x;
@@ -59,8 +59,8 @@ public class MyHashMap<K,V> {
 
 
     public void clear() {
-        for (Node<K,V> c = first; c != null; ) {
-            Node<K,V> next = c.next;
+        for (Node<V,K> c = first; c != null; ) {
+            Node<V,K> next = c.next;
             c.key = null;
             c.value = null;
             c.next = null;
@@ -77,13 +77,13 @@ public class MyHashMap<K,V> {
     }
 
 
-    private static class Node<K,V> {
+    private static class Node<V,K> {
         K key;
         V value;
-        Node<K,V> next;
-        Node<K,V> prev;
+        Node<V,K> next;
+        Node<V,K> prev;
 
-        Node(Node<K,V> prev, V value, K key, Node<K,V> next) {
+        Node(Node<V,K> prev, V value, K key, Node<V,K> next) {
             this.key = key;
             this.value = value;
             this.next = next;

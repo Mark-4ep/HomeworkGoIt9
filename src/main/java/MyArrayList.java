@@ -1,12 +1,12 @@
 import java.util.Arrays;
 
-class MyArrayList {
+class MyArrayList<E> {
 
     private Object[] info = new Object[1];
     private int index = 0;
 
 
-    public void add(Object value) {
+    public void add(E value) {
         info[index++] = value;
         info = Arrays.copyOf(info, info.length + 1);
     }
@@ -25,7 +25,7 @@ class MyArrayList {
         this.index = info.length - 1;
     }
     public void clear() {
-        info = new Object[1];
+        info = new Object[0];
     }
 
     public int size() {

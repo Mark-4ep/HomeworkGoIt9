@@ -72,6 +72,16 @@ class MyQueue<E> {
         }
     }
 
+    public Node<E> peek() {
+        return get(size());}
+
+    public Node<E> poll() {
+        final Node<E> pollRemove = peek();
+        remove(size());
+        return pollRemove;
+    }
+
+
 
     private static class Node<E> {
         E item;

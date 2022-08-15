@@ -73,7 +73,7 @@ public class MyStack<E> {
 
     public Node<E> peek() {return get(0);}
 
-    public Node<E> poll() {
+    public Node<E> pop() {
         final Node<E> pollRemove = peek();
         remove(0);
         return pollRemove;
