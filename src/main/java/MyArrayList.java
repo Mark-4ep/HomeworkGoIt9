@@ -25,7 +25,7 @@ class MyArrayList<E> {
         this.index = info.length - 1;
     }
     public void clear() {
-        info = new Object[0];
+        info = new Object[1];
     }
 
     public int size() {
