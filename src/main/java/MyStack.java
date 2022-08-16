@@ -16,7 +16,7 @@ public class MyStack<E> {
     }
 
     public void remove(int index) {
-        final Node<E> e = get(index);
+        final Node<E> e = (Node<E>) get(index);
 
         final E element = e.item;
         final Node<E> next = e.next;
@@ -41,17 +41,19 @@ public class MyStack<E> {
 
     }
 
-    public Node<E> get(int index) {
+    public Object get(int index) {
+        Object resulGet = new Object();
+
         if (index < (size >> 1)) {
             Node<E> x = first;
             for (int i = 0; i < index; i++)
                 x = x.next;
-            return x;
+            return resulGet = x.item;
         } else {
             Node<E> x = last;
             for (int i = size - 1; i > index; i--)
                 x = x.prev;
-            return x;
+            return resulGet = x.item;
         }
     }
 
@@ -71,12 +73,12 @@ public class MyStack<E> {
         return size;
     }
 
-    public Node<E> peek() {return get(0);}
+    public Object peek() {return get(0);}
 
-    public Node<E> pop() {
-        final Node<E> pollRemove = peek();
+    public Object pop() {
+        final Object popRemove = peek();
         remove(0);
-        return pollRemove;
+        return popRemove;
     }
 
 

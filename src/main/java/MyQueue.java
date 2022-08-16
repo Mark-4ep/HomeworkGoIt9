@@ -17,7 +17,7 @@ class MyQueue<E> {
     }
 
     public void remove(int index) {
-        final Node<E> e = get(index);
+        final Node<E> e = (Node<E>) get(index);
 
         final E element = e.item;
         final Node<E> next = e.next;
@@ -58,25 +58,27 @@ class MyQueue<E> {
         return size;
     }
 
-    public Node<E> get(int index) {
+    public Object get(int index) {
+        Object resulGet = new Object();
+
         if (index < (size >> 1)) {
             Node<E> x = first;
             for (int i = 0; i < index; i++)
                 x = x.next;
-            return x;
+            return resulGet = x.item;
         } else {
             Node<E> x = last;
             for (int i = size - 1; i > index; i--)
                 x = x.prev;
-            return x;
+            return resulGet = x.item;
         }
     }
 
-    public Node<E> peek() {
+    public Object peek() {
         return get(size());}
 
-    public Node<E> poll() {
-        final Node<E> pollRemove = peek();
+    public Object poll() {
+        final Object pollRemove = peek();
         remove(size());
         return pollRemove;
     }

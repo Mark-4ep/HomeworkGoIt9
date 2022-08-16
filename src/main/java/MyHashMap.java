@@ -1,14 +1,16 @@
 
 
-public class MyHashMap<V,K> {
+public class MyHashMap<K,V> {
 
-    private Node<V,K> last;
-    private Node<V,K> first;
+    private Node<K,V> last;
+    private Node<K,V> first;
     private int size;
 
-    public void put(V value, K key) {
-        final Node<V,K> l = last;
-        final Node<V,K> newNode = new Node<>(l, value, key, null);
+    private Node<K,V> getNode;
+
+    public void put(K key, V value) {
+        final Node<K,V> l = last;
+        final Node<K,V> newNode = new Node<>(l, key, value, null);
         last = newNode;
         if (l == null)
             first = newNode;
@@ -18,12 +20,13 @@ public class MyHashMap<V,K> {
     }
 
     public void remove(Object key) {
-        final Node<V,K> e = get(key);
+        get(key);
+        final Node<K,V> e = getNode;
 
         final V elementValue = e.value;
         final K elementKey = e.key;
-        final Node<V,K> next = e.next;
-        final Node<V,K> prev = e.prev;
+        final Node<K,V> next = e.next;
+        final Node<K,V> prev = e.prev;
 
         if (prev == null) {
             first = next;
@@ -45,22 +48,22 @@ public class MyHashMap<V,K> {
 
     }
 
-    public Node<V,K> get(Object key) {
-
-        Node<V,K> x = first;
+    public Object get(Object key) {
+        Object resulGet = new Object();
+        getNode = first;
         for (int i = 0; i < size; i++)
-            if (key.equals(x.key)) {
-                return x;
+            if (key.equals(getNode.key)) {
+                return resulGet = getNode.value;
             } else {
-                x = x.next;
+                getNode = getNode.next;
             }
-        return x;
+        return resulGet = getNode.value;
     }
 
 
     public void clear() {
-        for (Node<V,K> c = first; c != null; ) {
-            Node<V,K> next = c.next;
+        for (Node<K,V> c = first; c != null; ) {
+            Node<K,V> next = c.next;
             c.key = null;
             c.value = null;
             c.next = null;
@@ -77,13 +80,14 @@ public class MyHashMap<V,K> {
     }
 
 
-    private static class Node<V,K> {
+    private static class Node<K,V> {
+        int hash;
         K key;
         V value;
-        Node<V,K> next;
-        Node<V,K> prev;
+        Node<K,V> next;
+        Node<K,V> prev;
 
-        Node(Node<V,K> prev, V value, K key, Node<V,K> next) {
+        Node(Node<K,V> prev, K key, V value, Node<K,V> next) {
             this.key = key;
             this.value = value;
             this.next = next;
