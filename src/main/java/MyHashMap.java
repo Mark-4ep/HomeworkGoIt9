@@ -9,14 +9,16 @@ public class MyHashMap<K,V> {
     private Node<K,V> getNode;
 
     public void put(K key, V value) {
-        final Node<K,V> l = last;
-        final Node<K,V> newNode = new Node<>(l, key, value, null);
-        last = newNode;
-        if (l == null)
-            first = newNode;
-        else
-            l.next = newNode;
-        size++;
+        if (get(key).equals(false)) {
+            final Node<K,V> l = last;
+            final Node<K,V> newNode = new Node<>(l, key, value, null);
+            last = newNode;
+            if (l == null)
+                first = newNode;
+            else
+                l.next = newNode;
+            size++;
+        }
     }
 
     public void remove(Object key) {
@@ -56,8 +58,8 @@ public class MyHashMap<K,V> {
                 return resulGet = getNode.value;
             } else {
                 getNode = getNode.next;
-            }
-        return resulGet = getNode.value;
+        }
+        return false;
     }
 
 
