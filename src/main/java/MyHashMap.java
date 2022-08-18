@@ -9,7 +9,7 @@ public class MyHashMap<K,V> {
     private Node<K,V> getNode;
 
     public void put(K key, V value) {
-        if (get(key).equals(false)) {
+        if (get(key) == null) {
             final Node<K,V> l = last;
             final Node<K,V> newNode = new Node<>(l, key, value, null);
             last = newNode;
@@ -18,6 +18,8 @@ public class MyHashMap<K,V> {
             else
                 l.next = newNode;
             size++;
+        }else if(getNode.key.equals(key)) {
+            getNode.value = value;
         }
     }
 
@@ -59,7 +61,7 @@ public class MyHashMap<K,V> {
             } else {
                 getNode = getNode.next;
         }
-        return false;
+        return null;
     }
 
 
